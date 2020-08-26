@@ -4,7 +4,7 @@
 2.设置数据库环境变量，注意修改root用户的密码，参见后续教程<br>
 
 ```
-1)	输出安装时自动生成的debian.cnf文件内容
+1)输出安装时自动生成的debian.cnf文件内容
 sudo cat /etc/mysql/debian.cnf
 输出内容如下
 # Automatically generated for Debian scripts. DO NOT TOUCH!
@@ -18,15 +18,15 @@ host     = localhost
 user     = debian-sys-maint
 password = iqhZ4BsjJvWsGXfy
 socket   = /var/run/mysqld/mysqld.sock
-2)	使用文件中的user段的debian-sys-maint用户进行登录
+2)使用文件中的user段的debian-sys-maint用户进行登录
 $ mysql -udebian-sys-maint -p
 Enter password: // 这里输入上面文件内的password段的值
-3)	修改root用户的插件和密码
+3)修改root用户的插件和密码
 此处一定要记得改plugin的值为mysql_native_password
 UPDATE mysql.user SET plugin="mysql_native_password", authentication_string=PASSWORD("password") WHERE user="root";
 如果上一步骤中出现密码过于简单无法修改的情况，可以先将validate_password_policy的值设置为0或者LOW。
 SET GLOBAL validate_password_policy=0;
-4)	重启mysql就可以使用新设置的密码进行登录了
+4)重启mysql就可以使用新设置的密码进行登录了
 sudo service mysql restart
 ```
 
